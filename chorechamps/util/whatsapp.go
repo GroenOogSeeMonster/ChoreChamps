@@ -1,9 +1,9 @@
 package util
 
 import (
-	"ChoreChamps/config"
+	"github.com/GroenOogSeeMonster/ChoreChamps/chorechamps/config"
 	"github.com/twilio/twilio-go"
-	openapi "github.com/twilio/twilio-go/rest/api/v2010"
+	"github.com/twilio/twilio-go/rest/api/v2010"
 )
 
 func SendWhatsApp(to string, message string) error {

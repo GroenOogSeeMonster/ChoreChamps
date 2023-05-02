@@ -4,7 +4,6 @@ import (
 	"github.com/labstack/echo/v4"
 	"gorm.io/gorm"
 	"net/http"
-	"ChoreChamps/model"
 )
 
 type KidHandler struct {

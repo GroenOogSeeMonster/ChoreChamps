@@ -1,11 +1,14 @@
 package main
 
 import (
-	"github.com/GroenOogSeeMonster/chorechamps/config"
-	"github.com/GroenOogSeeMonster/chorechamps/handler"
-	"github.com/GroenOogSeeMonster/chorechamps/middleware"
-	"github.com/GroenOogSeeMonster/chorechamps/model"
-	"github.com/gin-gonic/gin"
+    "github.com/GroenOogSeeMonster/ChoreChamps/chorechamps/config"
+    "github.com/GroenOogSeeMonster/ChoreChamps/chorechamps/handler"
+    customMiddleware "github.com/GroenOogSeeMonster/ChoreChamps/chorechamps/middleware"
+    "github.com/GroenOogSeeMonster/ChoreChamps/chorechamps/model"
+    "github.com/labstack/echo/v4"
+    "github.com/labstack/echo/v4/middleware"
+    "gorm.io/driver/mysql"
+    "gorm.io/gorm"
 )
 
 func main() {
@@ -13,7 +16,8 @@ func main() {
 	config.Init()
 
 	// Set up the database
-	db, err := gorm.Open(mysql.Open(config.DBConnectionString()), &gorm.Config{})
+	db, err := gorm.Open(mysql.Open(config.DBConnection), &gorm.Config{})
+
 	if err != nil {
 		panic("failed to connect to the database")
 	}
@@ -27,7 +31,7 @@ func main() {
 	// Set up middleware
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
-	e.Use(ChoreChamps_middleware.AuthMiddleware(db))
+	e.Use(customMiddleware.AuthMiddleware(db))
 
 	// Set up handlers
 	kidHandler := handler.NewKidHandler(db)
