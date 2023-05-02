@@ -1,15 +1,11 @@
 package main
 
 import (
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
-	_ "github.com/go-sql-driver/mysql"
-	"gorm.io/driver/mysql"
-	"gorm.io/gorm"
-	"ChoreChamps/config"
-	"ChoreChamps/handler"
-	"ChoreChamps/middleware"
-	"ChoreChamps/model"
+	"github.com/GroenOogSeeMonster/chorechamps/config"
+	"github.com/GroenOogSeeMonster/chorechamps/handler"
+	"github.com/GroenOogSeeMonster/chorechamps/middleware"
+	"github.com/GroenOogSeeMonster/chorechamps/model"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
