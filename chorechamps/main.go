@@ -9,11 +9,15 @@ import (
     "github.com/labstack/echo/v4/middleware"
     "gorm.io/driver/mysql"
     "gorm.io/gorm"
+    "time"
 )
 
 func main() {
 	// Load configuration
 	config.Init()
+
+    // Add a delay before connecting to the database
+    time.Sleep(10 * time.Second)
 
 	// Set up the database
 	db, err := gorm.Open(mysql.Open(config.DBConnection), &gorm.Config{})
