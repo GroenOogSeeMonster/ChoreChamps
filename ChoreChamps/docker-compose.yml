@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  chorechamps:
+    build: .
+    ports:
+      - "8282:8282"
+    environment:
+      DB_CONNECTION: "root:password@tcp(mysql:3306)/chorechamps?charset=utf8mb4&parseTime=True&loc=Local"
+      WHATSAPP_ACCOUNT_SID: "your_twilio_account_sid"
+      WHATSAPP_AUTH_TOKEN: "your_twilio_auth_token"
+      WHATSAPP_PHONE_NUMBER: "your_twilio_phone_number"
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: chorechamps
+    volumes:
+      - chorechamps-db:/var/lib/mysql
+
+volumes:
+  chorechamps-db:
